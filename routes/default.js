@@ -29,7 +29,6 @@ router.get('/logout', (request, response) => {
 
 /* Returns personal info and THE SECRET INFORMATION */
 router.get('/personalInfo', (request, response) => {
-    alert("test");
     if(!request.session.loggedIn) {
         response.json({
             'status': 'failed',
@@ -38,13 +37,13 @@ router.get('/personalInfo', (request, response) => {
     } else {
         //ct changer image selon FIDO2 activé ou pas
         
-        //if (database[request.session.username].fido2) {
-        //    let image = '<img width="250px" src="img/theworstofthesecrets.jpg">';
         
-        //} else
-        //{
-            let image = '<img width="250px" src="img/passwordauth.png">';
-        //}
+        if (database[request.session.username].fido2) {
+            image = '<img width="250px" src="img/fido2.jpg">';
+        
+        } else {
+            image = '<img width="250px" src="img/passwordauth.png">';
+        }
         
         
         response.json({
@@ -52,10 +51,8 @@ router.get('/personalInfo', (request, response) => {
             'name': database[request.session.username].name,
             //ct
             //'theSecret': '<img width="250px" src="img/theworstofthesecrets.jpg">'
-            'theSecret': '<img width="250px" src="img/passwordauth.png">'
+            'theSecret': image
         })
-        alert(response.theSecret);
-        alert("ici");
     }
 })
 

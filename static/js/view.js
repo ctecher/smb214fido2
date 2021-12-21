@@ -34,11 +34,11 @@ let loadMainContainer = () => {
 }
 
 let checkIfLoggedIn = () => {
-    alert(`1 - view.js verification si authentifié.`);
+    //alert(`1 - view.js verification si authentifié.`);
     return fetch('/isLoggedIn', {credentials: 'include'})
         .then((response) => response.json())
         .then((response) => {
-            alert("2 - view.js");
+            //alert("2 - view.js");
             if(response.status === 'ok') {
                 return true
             } else {
