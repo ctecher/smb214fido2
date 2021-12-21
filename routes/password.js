@@ -7,7 +7,7 @@ router.post('/register', (request, response) => {
     if(!request.body || !request.body.username || !request.body.password || !request.body.name) {
         response.json({
             'status': 'failed',
-            'message': 'Request missing username or password!'
+            'message': 'Request username ou password manquant !'
         })
 
         return
@@ -16,6 +16,9 @@ router.post('/register', (request, response) => {
     let username = request.body.username;
     let password = request.body.password;
     let name     = request.body.name;
+    //ct
+    let fido2     = request.body.fido2;
+    //
 
     if(database[username]) {
         response.json({
@@ -30,6 +33,9 @@ router.post('/register', (request, response) => {
     database[username] = {
         'password': password,
         'name': name,
+        //ct
+        'fido2' : fido2,
+        //
         'id': utils.randomBase64URLBuffer()
     }
 

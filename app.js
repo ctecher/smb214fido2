@@ -37,6 +37,6 @@ app.use('/webauthn', webuathnauth)
 //const port = config.port || 3000;
 const port = process.env.PORT || 3000;
 app.listen(port);
-console.log(`Started app on port ${port}`);
+console.log(`Lancement de l'application sur le port ${port}`);
 
 module.exports = app;

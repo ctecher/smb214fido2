@@ -21,6 +21,7 @@ let loadMainContainer = () => {
         .then((response) => response.json())
         .then((response) => {
             if(response.status === 'ok') {
+                //alert(response.theSecret);
                 $('#theSecret').html(response.theSecret)
                 $('#name').html(response.name)
                 $('#registerContainer').hide();
@@ -33,9 +34,11 @@ let loadMainContainer = () => {
 }
 
 let checkIfLoggedIn = () => {
+    alert(`1 - view.js verification si authentifié.`);
     return fetch('/isLoggedIn', {credentials: 'include'})
         .then((response) => response.json())
         .then((response) => {
+            alert("2 - view.js");
             if(response.status === 'ok') {
                 return true
             } else {
@@ -43,6 +46,7 @@ let checkIfLoggedIn = () => {
             }
         })
 }
+
 
 $('#logoutButton').click(() => {
     fetch('/logout', {credentials: 'include'});

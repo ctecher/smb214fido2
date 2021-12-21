@@ -5,6 +5,7 @@ const database = require('./db');
 
 /* Returns if user is logged in */
 router.get('/isLoggedIn', (request, response) => {
+    //console.log("test");
     if(!request.session.loggedIn) {
         response.json({
             'status': 'failed'
@@ -28,17 +29,33 @@ router.get('/logout', (request, response) => {
 
 /* Returns personal info and THE SECRET INFORMATION */
 router.get('/personalInfo', (request, response) => {
+    alert("test");
     if(!request.session.loggedIn) {
         response.json({
             'status': 'failed',
             'message': 'Access denied'
         })
     } else {
+        //ct changer image selon FIDO2 activé ou pas
+        
+        //if (database[request.session.username].fido2) {
+        //    let image = '<img width="250px" src="img/theworstofthesecrets.jpg">';
+        
+        //} else
+        //{
+            let image = '<img width="250px" src="img/passwordauth.png">';
+        //}
+        
+        
         response.json({
             'status': 'ok',
             'name': database[request.session.username].name,
-            'theSecret': '<img width="250px" src="img/theworstofthesecrets.jpg">'
+            //ct
+            //'theSecret': '<img width="250px" src="img/theworstofthesecrets.jpg">'
+            'theSecret': '<img width="250px" src="img/passwordauth.png">'
         })
+        alert(response.theSecret);
+        alert("ici");
     }
 })
 

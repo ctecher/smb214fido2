@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title></title>
+    <title>SMB214 - Fido2 Webauthn & CTAP2</title>
     <link rel="stylesheet" href="css/milligram.min.css">
     <style>
         html, body, .container, .row {
@@ -33,35 +33,48 @@
 
             <div class="column" id="registerContainer">
                 <div class="formcontainer register">
-                    <h3>Register page</h3>
+                    <h3>Page d'enregistrement</h3>
                     <form id="register">
                       <fieldset>
-                        <label for="name">name</label>
+                        <label for="name">Nom</label>
                         <input type="text" name="name">
-                        <label for="username">username</label>
+                        <label for="username">Login utilisateur</label>
                         <input type="text" name="username">
+                        <label for="password">Mot de passe</label>
+                        <input type="text" name="password">
+                        <label for="fido2">Utiliser Fido2</label>
+                        <input type="checkbox" name="fido2">
+                      </br>
+                        
 
-                        <input class="button-primary" type="submit" value="Register">
+
+                        <input class="button-primary" type="submit" value="Enregistrement">
                       </fieldset>
                     </form>
 
-                    <a href="#" id="toLogin">Already registered? Login page</a>
+                    <a href="#" id="toLogin">Déjà enregistré ? Page d'authentification<a>
                 </div>
             </div>
 
             <div class="column" id="loginContainer">
                 <div class="formcontainer login">
-                    <h3>Login page</h3>
+                    <h3>Page d'authentification</h3>
                     <form id="login">
                       <fieldset>
-                        <label for="username">username</label>
+                        <label for="username">Login utilisateur</label>
                         <input type="text" name="username">
+                        <label for="password">Mot de passe</label>
+                        <input type="text" name="password">
+                        <label for="fido2">Utiliser Fido2</label>
+                        <input type="checkbox" name="fido2">
+                      </br>
 
-                        <input class="button-primary" type="submit" value="Login">
+
+                        <input class="button-primary" type="submit" value="Connexion">
                       </fieldset>
                     </form>
 
-                    <a href="#" id="toRegistration">Not registered yet? Registration</a>
+                    <a href="#" id="toRegistration">Pas encore enregistré ? Enregistrement</a>
                 </div>
             </div>
 
@@ -87,6 +100,7 @@
         $(document).ready(() => {
             checkIfLoggedIn()
             .then((response) => {
+                alert ("3 - index.html" + response);
                 if(response)
                     return loadMainContainer()
             })
