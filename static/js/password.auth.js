@@ -1,84 +1,65 @@
-/* Handle for register form submission */
-$('#register').submit(function(event) {
-    event.preventDefault();
+// /* Handle for register form submission */
+// $('#register').submit(function(event) {
+//     event.preventDefault();
 
-    let username = this.username.value;
-    let password = this.password.value;
-    let name     = this.name.value;
-    //ct
-    let fido2    = this.fido2.checked;
-    //
-    // ct
-    /*
+//     let username = this.username.value;
+//     let password = this.password.value;
+//     let name     = this.name.value;
 
-    if(!username || !password || !name) {
-         alert('Nom , login utilisateur ou mot de passe manquant !')
-        return
-    }
-    */
-    
+//     if(!username || !password || !name) {
+//         alert('Name, username or password is missing!')
+//         return
+//     }
 
-    if ( !username || !name ) {
-        alert('Nom ou login utilisateur manquant !')
-        return
-    } 
+//     let formBody = {username, password, name}; 
 
-    if ( username && name && !password && !fido2) {
-        alert('Not de passe nécesaire pour  pour une authentification classique !')
-        return
-    }
+//     fetch('/password/register', {
+//         method: 'POST',
+//         credentials: 'include',
+//         headers: {
+//           'Content-Type': 'application/json'
+//         },
+//         body: JSON.stringify(formBody)
+//     })
+//     .then((response) => response.json())
+//     .then((response) => {
+//         if(response.status === 'ok') {
+//             loadMainContainer()
+//         } else {
+//             alert(`Server responed with error. The message is: ${response.message}`);
+//         }
+//     })
+// })
 
-    //ct
-    //let formBody = {username, password, name}; 
-    let formBody = {username, password, name, fido2}; 
+// /* Handle for login form submission */
+// $('#login').submit(function(event) {
+//     event.preventDefault();
 
-    fetch('/password/register', {
-        method: 'POST',
-        credentials: 'include',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(formBody)
-    })
-    .then((response) => response.json())
-    .then((response) => {
-        if(response.status === 'ok') {
-            loadMainContainer()
-        } else {
-            alert(`Server responed with error. The message is: ${response.message}`);
-        }
-    })
-})
+//     let username = this.username.value;
+//     let password = this.password.value;
 
-/* Handle for login form submission */
-$('#login').submit(function(event) {
-    event.preventDefault();
+//     if(!username || !password) {
+//         alert('Username or password is missing!')
+//         return
+//     }
 
-    let username = this.username.value;
-    let password = this.password.value;
-
-    if(!username || !password) {
-        alert('Username or password is missing!')
-        return
-    }
-
-    let formBody = {username, password}; 
-    fetch('/password/login', {
-        method: 'POST',
-        credentials: 'include',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(formBody)
-    })
-    .then((response) => response.json())
-    .then((response) => {
-        if(response.status === 'ok') {
-            loadMainContainer()   
-        } else {
-            alert(`Server responed with error. The message is: ${response.message}`);
-        }
-    })
-})
+//     let formBody = {username, password}; 
+//     fetch('/password/login', {
+//         method: 'POST',
+//         credentials: 'include',
+//         headers: {
+//           'Content-Type': 'application/json'
+//         },
+//         body: JSON.stringify(formBody)
+//     })
+//     .then((response) => response.json())
+//     .then((response) => {
+//         if(response.status === 'ok') {
+//             loadMainContainer()   
+//         } else {
+//             alert(`Server responed with error. The message is: ${response.message}`);
+//         }
+//     })
+// })
 
 
