@@ -4,7 +4,7 @@
 // id du formulaire 
 $('#register').submit(function(event) {
     //alert("ennregistrement en cours");
-    console.log("navigateur : ennregistrement en cours");
+    //console.log("navigateur : ennregistrement en cours");
     event.preventDefault();
 
     let username = this.username.value;
@@ -16,7 +16,7 @@ $('#register').submit(function(event) {
     }
 
     // lancement d'un défi
-    console.log("lancemen defi");
+    //console.log("lancemen defi");
     getMakeCredentialsChallenge({username, name})
         .then((response) => {
             let publicKey = preformatMakeCredReq(response);
