@@ -37,7 +37,9 @@ router.get('/personalInfo', (request, response) => {
         response.json({
             'status': 'ok',
             'name': database[request.session.username].name,
-            'theSecret': '<img width="250px" src="img/theworstofthesecrets.jpg">'
+            //'theSecret': '<img width="250px" src="imgtheworstofthesecrets.jpg">'
+            'theSecret': '<img width="250px" src="img/fido2.jpg">'
+            
         })
     }
 })
