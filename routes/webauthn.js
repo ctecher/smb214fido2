@@ -20,7 +20,7 @@ router.post('/register', (request, response) => {
     let username = request.body.username;
     let name     = request.body.name;
 
-    // verifeir que l'utilisaetiur n'existe pas ou qu'il n'est déjà enregistre"
+    // verifier que l'utilisateur n'existe pas ou qu'il n'est déjà enregistre"
     if(database[username] && database[username].registered) {
         response.json({
             'status': 'failed',
@@ -42,18 +42,18 @@ router.post('/register', (request, response) => {
     }
     console.log("Serveur database user: " + JSON.stringify(database));
     
-    //generer un defi makeCred en trsnamettant le username, nom et l'identifiant
+    //generer un defi makeCred en transmettant le username, nom et l'identifiant
     let challengeMakeCred    = utils.generateServerMakeCredRequest(username, name, database[username].id)
     // indiquer au navigateur que vous allez bien
     challengeMakeCred.status = 'ok'
     //ajout des infos que l'on veut à response
     //challengeMakeCred.test = 'Charles Techer'
     
-    // rnregistremetn dasn la session du username et du challenge pour polus trad
+    // enregistrement dans la session du username et du challenge pour plus tard
     request.session.challenge = challengeMakeCred.challenge;
     request.session.username  = username;
     
-    // affichage des infos au niveau du navigateur dans la console ? reseigner la variable response qui est envoyé au navigateur ?
+    // affichage des infos au niveau du navigateur dans la console ? renseigner l'objet response qui est envoyée au navigateur ?
     // faire en sorte de les afficher dans le navigateur
     // envoyer une reposne au navigateur
     response.json(challengeMakeCred);
@@ -130,6 +130,8 @@ router.post('/response', (request, response) => {
        }
    } else if(webauthnResp.response.authenticatorData !== undefined) {
        /* This is get assertion */
+       // diapo 43
+        result = utils.verifyAuthenticatorAssertionResponse(webauthnResp, database[request.session.username].authenticators);
     } else {
         response.json({
             'status': 'failed',
@@ -148,6 +150,38 @@ router.post('/response', (request, response) => {
 
 
 })
+
+
+router.post('/login', (request, response) => {
+    if(!request.body || !request.body.username) {
+        response.json({
+            'status': 'failed',
+            'message': 'Request missing username field!'
+        })
+
+        return
+    }
+
+    let username = request.body.username;
+
+    if(!database[username] || !database[username].registered) {
+        response.json({
+            'status': 'failed',
+            'message': `User ${username} does not exist!`
+        })
+
+        return
+    }
+
+    let getAssertion    = utils.generateServerGetAssertion(database[username].authenticators)
+    getAssertion.status = 'ok'
+
+    request.session.challenge = getAssertion.challenge;
+    request.session.username  = username;
+
+    response.json(getAssertion)
+})
+
 
 /* ---------- ROUTES END ---------- */
 
