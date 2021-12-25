@@ -76,14 +76,18 @@ router.post('/response', (request, response) => {
     }
 
     let webauthnResp = request.body
-    //analyse des donénes clioent
+    //analyse des données clioent
     let clientData   = JSON.parse(base64url.decode(webauthnResp.response.clientDataJSON));
+    console.log("clientData : ");
+    console.log(clientData);
+    console.log("request.session.challenge : " + request.session.challenge);
+    console.log("config.origin : " + config.origin);
 
     /* Check challenge... */
     if(clientData.challenge !== request.session.challenge) {
         response.json({
             'status': 'failed',
-            //verification correpondance origine
+            //verification correspondance origine
             'message': 'Challenges don\'t match!'
         })
     }
@@ -92,7 +96,7 @@ router.post('/response', (request, response) => {
     if(clientData.origin !== config.origin) {
         response.json({
             'status': 'failed',
-            //verification correpondance defi
+            //verification correspondance defi
             'message': 'Origins don\'t match!'
         })
     }
