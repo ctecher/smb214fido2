@@ -31,7 +31,7 @@ router.post('/register', (request, response) => {
     }
 
     // creation de l'utilisateur comme non enregistre
-    //console.log("Serveur : creation utilisateur");
+    console.log("Serveur : creation utilisateur");
     database[username] = {
         'name': name,
         'registered': false,
@@ -40,7 +40,7 @@ router.post('/register', (request, response) => {
         //stockage des authentificateurs enregistres
         'authenticators': []
     }
-    //console.log("Serveur database user: " + JSON.stringify(database));
+    console.log("Serveur database user: " + JSON.stringify(database));
     
     //generer un defi makeCred en trsnamettant le username, nom et l'identifiant
     let challengeMakeCred    = utils.generateServerMakeCredRequest(username, name, database[username].id)
