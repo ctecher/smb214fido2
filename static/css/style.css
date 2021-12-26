@@ -1,9 +1,37 @@
+html, body, .container, .row {
+    height: 100%;
+    width: 940px;
+    /* 0 -> aucune marge en haut en en bas ; auto à droite et à gauche -> permet de centrer en partagent l'espace */
+    margin: 0 auto;
+    /*padding à gauche et à droite*/
+    padding: 0 10px ;
+}
+
+.formcontainer {
+    background: #f0f0f0;
+    padding: 15px;
+}
+
+.formcontainer form, .formcontainer fieldset{
+    margin:0;
+}
+
+.secretcontainer {
+    background: #f0f0f0;
+    padding: 15px;
+}
+
+#registerContainer, #mainContainer {
+    display: none;
+}
+
 
 .wrapper
 {
-    width: 940px;
+    width: 100%;
     /* 0 aucune marge en haut en en bas ; auto à droite et à gauche pour permettre de centrer en partagent l'espace */
     margin: 0 auto;
+    /*margin-left: 10px;*/
     /*padding à gauche et à droite*/
     padding: 0 10px;
 }
@@ -14,17 +42,46 @@
 header
 {
     height: 50px;
+    /*voir en permanence en haut*/
+    position: fixed;
+    top : 0px ; /*coller en haut*/
 }
 
 /* pour le h1 du header*/
-header div h1
+header  h1
 {
     float: left;
     margin-top: 32px;
 }
 
-header div div
+header div 
 {
     float: right;
     margin-top: 50px;
+    margin-left:540px;
 }
+
+/* FOOTER */
+
+footer
+{
+    height: 50px;
+    /*voir en permanence en bas à droite*/
+    position: fixed;
+    bottom : 0px ; /*coller en bas*/
+}
+
+/* pour le h1 du header*/
+footer  h3{
+    float: left;
+    
+}
+
+footer div 
+{
+    float: right;
+    margin-top: 5px;
+    margin-left: 480px;
+    
+}
+
