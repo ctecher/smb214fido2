@@ -16,7 +16,7 @@ $('#register').submit(function(event) {
     }
 
     // lancement d'un défi
-    alert("lancemen defi");
+    //alert("lancemen defi");
     getMakeCredentialsChallenge({username, name})
         .then((response) => {
             let publicKey = preformatMakeCredReq(response);
@@ -47,7 +47,7 @@ $('#register').submit(function(event) {
         
 let getMakeCredentialsChallenge = (formBody) => {
     // formbody contient username et nom
-    alert("Novigateur getMakeCredentialsChallenge")   ;
+    //alert("Navigateur getMakeCredentialsChallenge")   ;
     // fetch permet de lancer une requete pour récupérer des ressources sur le réseau
     //https://developer.mozilla.org/fr/docs/Web/API/Fetch_API/Using_Fetch
     return fetch('/webauthn/register', {
