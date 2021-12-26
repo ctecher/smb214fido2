@@ -34,8 +34,10 @@ let loadMainContainer = () => {
 
 let checkIfLoggedIn = () => {
     return fetch('/isLoggedIn', {credentials: 'include'})
-        .then((response) => response.json())
+        //promesse retourne response
+        .then((response) => response.json())        
         .then((response) => {
+            console.log(response);
             if(response.status === 'ok') {
                 return true
             } else {

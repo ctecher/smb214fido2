@@ -14,3 +14,9 @@ Slides: https://slides.com/fidoalliance/jan-2018-fido-seminar-webauthn-tutorial#
 - `cd webauthn-demo`
 - `npm install`
 - `node app`
+
+### Exposé SMB214
+
+- Mise en oeuvre de la solution à l'aide des slides
+- Publication sur une Web App Azure
+

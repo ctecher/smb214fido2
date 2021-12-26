@@ -7,6 +7,7 @@ const database  = require('./db');
 
 /* ---------- ROUTES START ---------- */
 router.post('/register', (request, response) => {
+    console.log("appel /register dans serveur");
     // verifier que le champs sont renseignes
     if(!request.body || !request.body.username || !request.body.name) {
         response.json({

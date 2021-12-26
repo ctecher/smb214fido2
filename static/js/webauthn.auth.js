@@ -11,7 +11,7 @@ $('#register').submit(function(event) {
     let name     = this.name.value;
 
     if(!username || !name) {
-        alert('Name or username is missing!')
+        alert('Nom ou nom utilisateur non renseigné !')
         return
     }
 
@@ -46,6 +46,7 @@ $('#register').submit(function(event) {
 
         
 let getMakeCredentialsChallenge = (formBody) => {
+    console.log("appel getMakeCredentialsChallenge dans navigateur");
     // fetch permet de lancer une requete pour récupérer des ressources sur le réseau
     //https://developer.mozilla.org/fr/docs/Web/API/Fetch_API/Using_Fetch
     return fetch('/webauthn/register', {
