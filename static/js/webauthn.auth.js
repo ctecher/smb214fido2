@@ -46,7 +46,7 @@ $('#register').submit(function(event) {
 
         
 let getMakeCredentialsChallenge = (formBody) => {
-    console.log("appel getMakeCredentialsChallenge dans navigateur");
+    // formbody contient username et nom
     // fetch permet de lancer une requete pour récupérer des ressources sur le réseau
     //https://developer.mozilla.org/fr/docs/Web/API/Fetch_API/Using_Fetch
     return fetch('/webauthn/register', {
@@ -57,7 +57,7 @@ let getMakeCredentialsChallenge = (formBody) => {
         headers: {
           'Content-Type': 'application/json'
         },
-        // encodage de l'objet JS formbody fourni en parametre en JSON
+        // encodage de l'objet JS formbody fourni en parametre en JSON : contient username et name
         body: JSON.stringify(formBody)
     })
     // reponse du serveur en JSON

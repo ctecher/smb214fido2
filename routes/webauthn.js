@@ -7,12 +7,12 @@ const database  = require('./db');
 
 /* ---------- ROUTES START ---------- */
 router.post('/register', (request, response) => {
-    console.log("appel /register dans serveur");
+    // recupere de l'appel de la fonction getMakeCredentialsChallenge  depuis webauthn.auth.js
     // verifier que le champs sont renseignes
     if(!request.body || !request.body.username || !request.body.name) {
         response.json({
             'status': 'failed',
-            'message': 'Request missing name or username field!'
+            'message': 'Champ nom ou nom utilisateur manquant!'
         })
 
         return
@@ -25,7 +25,7 @@ router.post('/register', (request, response) => {
     if(database[username] && database[username].registered) {
         response.json({
             'status': 'failed',
-            'message': `Username ${username} already exists`
+            'message': `Le nom utilisateur ${username} existe déjà.`
         })
 
         return

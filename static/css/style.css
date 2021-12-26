@@ -1,0 +1,30 @@
+
+.wrapper
+{
+    width: 940px;
+    /* 0 aucune marge en haut en en bas ; auto à droite et à gauche pour permettre de centrer en partagent l'espace */
+    margin: 0 auto;
+    /*padding à gauche et à droite*/
+    padding: 0 10px;
+}
+
+
+/* HEADER */
+
+header
+{
+    height: 50px;
+}
+
+/* pour le h1 du header*/
+header div h1
+{
+    float: left;
+    margin-top: 32px;
+}
+
+header div div
+{
+    float: right;
+    margin-top: 50px;
+}
