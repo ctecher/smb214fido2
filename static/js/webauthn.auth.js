@@ -3,7 +3,7 @@
 /* Handle for register form submission */
 // id du formulaire 
 $('#register').submit(function(event) {
-    alert("ennregistrement en cours");
+    //alert("ennregistrement en cours");
     //console.log("navigateur : ennregistrement en cours");
     event.preventDefault();
 
