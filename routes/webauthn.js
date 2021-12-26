@@ -45,6 +45,7 @@ router.post('/register', (request, response) => {
     
     //generer un defi makeCred en transmettant le username, nom et l'identifiant
     let challengeMakeCred    = utils.generateServerMakeCredRequest(username, name, database[username].id)
+    console.log("Serveur challengeMakeCred : ok);
     // indiquer au navigateur que vous allez bien
     challengeMakeCred.status = 'ok'
     //ajout des infos que l'on veut à response
@@ -58,7 +59,7 @@ router.post('/register', (request, response) => {
     // faire en sorte de les afficher dans le navigateur
     // envoyer une reposne au navigateur
     response.json(challengeMakeCred);
-    //console.log("Serveur challengeMakeCred : " + JSON.stringify(challengeMakeCred));
+    console.log("Serveur challengeMakeCred : " + JSON.stringify(challengeMakeCred));
     
 })
 
