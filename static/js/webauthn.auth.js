@@ -3,8 +3,6 @@
 /* Handle for register form submission */
 // id du formulaire 
 $('#register').submit(function(event) {
-    //alert("ennregistrement en cours");
-    //console.log("navigateur : ennregistrement en cours");
     event.preventDefault();
 
     let username = this.username.value;
@@ -16,7 +14,6 @@ $('#register').submit(function(event) {
     }
 
     // lancement d'un défi
-    //alert("lancemen defi");
     getMakeCredentialsChallenge({username, name})
         .then((response) => {
             let publicKey = preformatMakeCredReq(response);
@@ -38,7 +35,7 @@ $('#register').submit(function(event) {
             if(response.status === 'ok') {
                 loadMainContainer()   
             } else {
-                alert(`Server responed with error. The message is: ${response.message}`);
+                alert(`Le serveur repond avec uen erreur. Le message est : ${response.message}`);
             }
         })
         .catch((error) => alert(error))
@@ -47,7 +44,6 @@ $('#register').submit(function(event) {
         
 let getMakeCredentialsChallenge = (formBody) => {
     // formbody contient username et nom
-    //alert("Navigateur getMakeCredentialsChallenge")   ;
     // fetch permet de lancer une requete pour récupérer des ressources sur le réseau
     //https://developer.mozilla.org/fr/docs/Web/API/Fetch_API/Using_Fetch
     return fetch('/webauthn/register', {
@@ -128,7 +124,7 @@ let getGetAssertionChallenge = (formBody) => {
     .then((response) => response.json())
     .then((response) => {
         if(response.status !== 'ok')
-            throw new Error(`Server responed with error. The message is: ${response.message}`);
+            throw new Error(`Le Serveur repond avec une erreur . Le message est : ${response.message}`);
 
         return response
     })
@@ -142,7 +138,7 @@ $('#login').submit(function(event) {
     let username = this.username.value;
 
     if(!username) {
-        alert('Username is missing!')
+        alert('Le nom utilisateur est manquant !')
         return
     }
 
@@ -159,7 +155,7 @@ $('#login').submit(function(event) {
             if(response.status === 'ok') {
                 loadMainContainer()   
             } else {
-                alert(`Server responed with error. The message is: ${response.message}`);
+                alert(`Le serveur repond avec une erreur. Le message est : ${response.message}`);
             }
         })
         .catch((error) => alert(error))

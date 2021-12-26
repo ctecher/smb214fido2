@@ -32,7 +32,6 @@ router.post('/register', (request, response) => {
     }
 
     // creation de l'utilisateur comme non enregistre
-    console.log("Serveur : creation utilisateur");
     database[username] = {
         'name': name,
         'registered': false,
@@ -41,11 +40,10 @@ router.post('/register', (request, response) => {
         //stockage des authentificateurs enregistres
         'authenticators': []
     }
-    console.log("Serveur database user: " + JSON.stringify(database));
+    console.log("Serveur - création de l'utilisateur : " + JSON.stringify(database));
     
     //generer un defi makeCred en transmettant le username, nom et l'identifiant
     let challengeMakeCred    = utils.generateServerMakeCredRequest(username, name, database[username].id)
-    console.log("Serveur challengeMakeCred : ok");
     // indiquer au navigateur que vous allez bien
     challengeMakeCred.status = 'ok'
     //ajout des infos que l'on veut à response
@@ -55,12 +53,8 @@ router.post('/register', (request, response) => {
     request.session.challenge = challengeMakeCred.challenge;
     request.session.username  = username;
     
-    // affichage des infos au niveau du navigateur dans la console ? renseigner l'objet response qui est envoyée au navigateur ?
-    // faire en sorte de les afficher dans le navigateur
     // envoyer une reposne au navigateur
-    response.json(challengeMakeCred);
-    console.log("Serveur challengeMakeCred : " + JSON.stringify(challengeMakeCred));
-    
+    response.json(challengeMakeCred);    
 })
 
 
@@ -80,7 +74,6 @@ router.post('/response', (request, response) => {
     let webauthnResp = request.body
     //analyse des données clioent
     let clientData   = JSON.parse(base64url.decode(webauthnResp.response.clientDataJSON));
-    console.log("test");
     console.log("clientData : ");
     console.log(clientData);
     console.log("request.session.challenge : " + request.session.challenge);

@@ -27,7 +27,7 @@ let loadMainContainer = () => {
                 $('#loginContainer').hide();
                 $('#mainContainer').show();
             } else {
-                alert(`Error! ${response.message}`)
+                alert(`Erreur ! ${response.message}`)
             }
         })
 }
@@ -37,7 +37,6 @@ let checkIfLoggedIn = () => {
         //promesse retourne response
         .then((response) => response.json())        
         .then((response) => {
-            console.log(response);
             if(response.status === 'ok') {
                 return true
             } else {
