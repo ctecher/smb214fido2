@@ -1,4 +1,4 @@
-# SMB214 Déploiement de l’application de démonstration FIDO2 
+# 1 - SMB214 Déploiement de l’application de démonstration FIDO2 
 ## Ressources utilisées
 
 #### FIDO Alliance WebAuthn demo
