@@ -183,8 +183,6 @@ Le déploiement de votre application dans Azure comme App Service se fait en sui
 
 ![Prérequis](./static/img/azure_02.png)
 
- 
-
 Avez votre compte étudiant, vous disposez de l’abonnement Azure pour les étudiants.
 
 Vous devez maintenant précisez le groupe de ressources de votre application Web, soit un groupe existant visible dans la liste ou créer un nouveau groupe de ressources.
@@ -276,8 +274,7 @@ dossier/smb214fido2$ git push azure
 
 L’exécution de la commande peut prendre quelques secondes …
 
-En accédant à votre application, vous pouvez visualiser :
-- L’application et la tester .
+En accédant à votre application, vous pouvez visualiser l’application et la tester :
 
 ![Prérequis](./static/img/azure_07.png) 
 
