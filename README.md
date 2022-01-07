@@ -144,8 +144,9 @@ dossier/smb214fido2$ node app
 ```
 # Accès l’application
 Depuis votre navigateur, saisissez l'url https://fido2.smb214.cnam.local:3000 (ignorez le risque de sécurité, c'est normal car vous avez généré un certificat autosigné).
- 
+
 ## Création de l’application dans le cloud Azure en mode PaaS (App service)
+
 
 # Les prérequis
 L’installation d’une application Web comme App Service dans Azure nécessite:
