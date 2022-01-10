@@ -154,7 +154,7 @@ Si vous souhaitez installer l’application de démonstration sur Microsoft Azur
 ### Les prérequis
 L’installation d’une application Web comme App Service dans Azure nécessite:
 - De disposer d’un **compte Azure** -> utilisez votre compte étudiant du CNAM ;
-- De disposer d’un **abonnement Azure** pour gérer les coûts et les ressources déployées. Vous utili-serez l’abonnement ADT4T de votre compte étudiant du CNED qui vous permet de bénéficier d’un crédit de 100 $ (voir document FIDO2_ActiverCréditAzureEtudiant.docx pour activer votre pass) ;
+- De disposer d’un **abonnement Azure** pour gérer les coûts et les ressources déployées. Vous utili-serez l’abonnement ADT4T de votre compte étudiant du CNAM qui vous permet de bénéficier d’un crédit de 100 $ (voir document FIDO2_ActiverCréditAzureEtudiant.docx pour activer votre pass) ;
 - De choisir un **Plan App Service** qui détermine les caractéristiques et les performances des serveurs virtuels qui vont exécuter votre Application Web ; le plan tarifaire le plus bas peut être utilisé ce qui n’engendrera aucun coût sur votre pass ;
 - De créer un **groupe de ressources Azure** pour regrouper et organiser les ressources nécessaires au service Web ;
 - De créer les **ressources Azure** nécessaires au service Web dans ce groupe de ressources ;
