@@ -1,33 +1,20 @@
-# SMB214 Déploiement de l’application de démonstration FIDO2 
+# SMB214 - FIDO 2
+## Déploiement de l’application de démonstration
 ## Ressources utilisées
 
 #### FIDO Alliance WebAuthn demo
 
 Slides: https://slides.com/fidoalliance/jan-2018-fido-seminar-webauthn-tutorial#/
 
-### Requirements
-
-- Firefox Nightly ; Chrome, Edge 
-- Nodejs + NPM
-- Text editor
-
-### Run
-
-- `git clone https://github.com/fido-alliance/webauthn-demo/`
-- `cd webauthn-demo`
-- `npm install`
-- `node app`
-
-### SMB214 – FIDO2
-### Déploiement de l’application de démonstration
+Dépôt : `https://github.com/fido-alliance/webauthn-demo/`
 
 ## 1. Téléchargement de l’application de démonstration
 
-# Méthode 1 - Depuis le site Github
+### Méthode 1 - Depuis le site Github
 - Téléchargez le dépôt du projet à l’URL suivante et décompressez l’archive dans le dossier de votre choix : 
 https://github.com/ctecher/smb214fido2.git
 
-# Méthode 2 - Utilisation de l’application Git
+### Méthode 2 - Utilisation de l’application Git
 - Installez Git dans votre environnement de travail : 
 - Lien : https://git-scm.com/ 
 
