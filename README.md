@@ -49,12 +49,12 @@ Si vous avez utilisé la méthode 1 pour récupérer les sources, vous devez dé
 ### Génération d'une clé privée et d'un certificat
 Dans le cadre de cette application, on va créer une clé privée ainsi qu’un certificat auto-signé. L’outil OpenSSL est nécessaire pour réaliser les étapes suivantes.
 
-#### Etape 1) On crée la clé privée :####
+#### Etape 1) On crée la clé privée :
 - COMMANDE SHELL 
 ```Bash
 dossier/smb214fido2$ openssl genrsa -out key.pem
 ```
-#### Etape 2) On crée un fichier de requête de signature de certificat####
+#### Etape 2) On crée un fichier de requête de signature de certificat
 - COMMANDE SHELL 
 ```Bash
 dossier/smb214fido2$ openssl req -new -key key.pem -out csr.pem
@@ -64,18 +64,18 @@ dossier/smb214fido2$ openssl req -new -key key.pem -out csr.pem
 
 Dans le cadre de cette exemple, vous pouvez par exemple choisir : **fido2.smb214.cnam.local**
 
-#### Etape 3) On génère le certificat auto-signé à l’aide du fichier CSR####
+#### Etape 3) On génère le certificat auto-signé à l’aide du fichier CSR
 - COMMANDE SHELL 
 ```Bash
 dossier/smb214fido2$ openssl x509 -req -days 9999 -in csr.pem -signkey key.pem -out cert.pem
 ```
-#### Etape 4) On dépose les fichiers key.pem et cert.pem dans le répertoire contenant les sources de l’application.####
+#### Etape 4) On dépose les fichiers key.pem et cert.pem dans le répertoire contenant les sources de l’application.
 ![fichiershttps](./static/img/vm_01.png)
 
-# Modification de l’application
+### Modification de l’application
 Par défaut, l’application n’a pas été configurée pour fonctionner avec le protocole HTTPS. De plus, il est nécessaire que l’on configure notre application pour qu’elle réponde avec l’url https://fido2.smb214.cnam.local
 
-**Etape 1) On modifie le fichier app.js de la façon suivante afin que l’application puisse démarrer en HTTPS :**
+#### Etape 1) On modifie le fichier app.js de la façon suivante afin que l’application puisse démarrer en HTTPS :
 
 - Ajoutez ces lignes de code juste après la ligne 18 du fichier app.js
 
@@ -106,7 +106,7 @@ const port = config.port || 3000;
 https.createServer(options, app).listen(port);
 console.log(`Lancement de l'application sur le port ${port}`);
 ```
-**Etape 2) On modifie le fichier config.json afin de modifier le port d’écoute indiquer l'origin avec l'url précédemment choisi en incluant le HTTPS et le numéro de port**
+#### Etape 2) On modifie le fichier config.json afin de modifier le port d’écoute indiquer l'origin avec l'url précédemment choisi en incluant le HTTPS et le numéro de port
 
 - FICHIER CONFIG.JSON 
 ```Javascript
@@ -116,11 +116,10 @@ console.log(`Lancement de l'application sur le port ${port}`);
 }
 ```
 
+`Remarque`
+`Rien ne vous empêche d’écouter sur un autre n° de port. Toutefois n’oubliez pas de vérifier que ce numéro soit identique dans le fichier config.jon et app.js.`
 
-**Remarque**
-Rien ne vous empêche d’écouter sur un autre n° de port. Toutefois n’oubliez pas de vérifier que ce numéro soit identique dans le fichier config.jon et app.js.
-
-# Démarrage de l’application
+### Démarrage de l’application
 Positionnez-vous dans le répertoire contenant les sources de l’application et exécutez les commandes suivantes. Pour information, la commande node app permet de démarrer l’application. 
 
 - COMMANDE SHELL 
@@ -128,64 +127,64 @@ Positionnez-vous dans le répertoire contenant les sources de l’application et
 dossier/smb214fido2$ npm install
 dossier/smb214fido2$ node app
 ```
-# Configuration du fichier hosts
+### Configuration du fichier hosts
 Afin d’être en mesure de joindre l’application avec l’url en HTTPS, il est nécessaire de configurer soit votre serveur DNS, soit votre fichier hosts.
 
-**Etape 1) On récupère l’adresse IP de votre machine (ipconfig ou ip -4).**
+#### Etape 1) On récupère l’adresse IP de votre machine (ipconfig ou ip -4).
 
-**Etape 2) On ajout une ligne dans le fichier hosts sur la machine depuis laquelle vous souhaitez joindre l’application.**
+#### Etape 2) On ajout une ligne dans le fichier hosts sur la machine depuis laquelle vous souhaitez joindre l’application.
  
 - FICHIER HOSTS 
 ```Bash
 192.168.0.4	fido2.smb214.cnam.local
 ```
 
-**Remarque**
-Sur Windows, le fichier hosts est stocké dans le répertoire C:\Windows\System32\drivers\etc. Gardez en tête que vous devez ouvrir votre éditeur de texte en tant qu’administrateur pour pouvoir enregistrer les modifications.
+`Remarque`
+`Sur Windows, le fichier hosts est stocké dans le répertoire C:\Windows\System32\drivers\etc. Gardez en tête que vous devez ouvrir votre éditeur de texte en tant qu’administrateur pour pouvoir enregistrer les modifications.`
 
 
-# Accès l’application
+### Accès l’application
 Depuis votre navigateur, saisissez l'url https://fido2.smb214.cnam.local:3000 (ignorez le risque de sécurité, c'est normal car vous avez généré un certificat autosigné).
 
 ![appweb](./static/img/appweb_01.png)
 
-## Création de l’application dans le cloud Azure en mode PaaS (App service)
+## 3. Création de l’application dans le cloud Azure en mode PaaS (App service)
+Si vous souhaitez installer l’application de démonstration sur Microsoft Azure, il suffit de suivre les instructions qui suivent.
 
-
-# Les prérequis
+### Les prérequis
 L’installation d’une application Web comme App Service dans Azure nécessite:
-- De disposer d’un compte Azure -> utilisez votre compte étudiant du CNAM ;
-- De disposer d’un abonnement Azure pour gérer les coûts et les ressources déployées. Vous utili-serez l’abonnement ADT4T de votre compte étudiant du CNED qui vous permet de bénéficier d’un crédit de 100 $ (voir document FIDO2_ActiverCréditAzureEtudiant.docx pour activer votre pass) ;
-- De choisir un Plan App Service qui détermine les caractéristiques et les performances des serveurs virtuels qui vont exécuter votre Application Web ; le plan tarifaire le plus bas peut être utilisé ce qui n’engendrera aucun coût sur votre pass ;
-- De créer un groupe de ressources Azure pour regrouper et organiser les ressources nécessaires au service Web ;
-- De créer les ressources Azure nécessaires au service Web dans ce groupe de ressources ;
-- De créer et d’utiliser un compte de déploiement en relation avec le protocole FTP ou Git. C’est le protocole Git qui est utilisé dans ce document.
+- De disposer d’un **compte Azure** -> utilisez votre compte étudiant du CNAM ;
+- De disposer d’un **abonnement Azure** pour gérer les coûts et les ressources déployées. Vous utili-serez l’abonnement ADT4T de votre compte étudiant du CNED qui vous permet de bénéficier d’un crédit de 100 $ (voir document FIDO2_ActiverCréditAzureEtudiant.docx pour activer votre pass) ;
+- De choisir un **Plan App Service** qui détermine les caractéristiques et les performances des serveurs virtuels qui vont exécuter votre Application Web ; le plan tarifaire le plus bas peut être utilisé ce qui n’engendrera aucun coût sur votre pass ;
+- De créer un **groupe de ressources Azure** pour regrouper et organiser les ressources nécessaires au service Web ;
+- De créer les **ressources Azure** nécessaires au service Web dans ce groupe de ressources ;
+- De créer et d’utiliser un **compte de déploiement** en relation avec le protocole FTP ou Git. C’est le protocole Git qui est utilisé dans ce document.
 
-INFORMATION
-Vous pouvez utiliser le même compte de déploiement créé pour tous vos déploiements Azure. Le nom d’utilisateur et le mot de passe du compte de déploiement sont différents de votre compte Azure qui vous  permet de vous identifier sur Azure..
+`INFORMATION`
+`Vous pouvez utiliser le même compte de déploiement créé pour tous vos déploiements Azure. Le nom d’utilisateur et le mot de passe du compte de déploiement sont différents de votre compte Azure qui vous  permet de vous identifier sur Azure.`
 
-![Prérequis](./static/img/azure_01.png)
+![ressourcesazure](./static/img/azure_01.png)
  
 La création de l’application se fait :
 - En utilisant le **portail Azure** ou **Azure Cloud Shell**.
-- En déployant le code de l’application depuis son ordinateur local grâce à Git.
+- En déployant le code de l’application depuis son ordinateur local grâce à **Git**.
 
-INFORMATION
-**Azure Cloud Shell** est un environnement d’interpréteur de commandes interactif utilisable dans votre navigateur. Il n’y a alors aucun logiciel à installer et à configurer sur votre ordinateur.
-Cet environnement permet de configurer et d’utiliser les services Azure avec choisissant Bash ou PowerShell pour lancer et exécutez vos commandes.
+`INFORMATION`
+`Azure Cloud Shell est un environnement d’interpréteur de commandes interactif utilisable dans votre navigateur. Il n’y a alors aucun logiciel à installer et à configurer sur votre ordinateur.`
+`Cet environnement permet de configurer et d’utiliser les services Azure avec choisissant Bash ou PowerShell pour lancer et exécutez vos commandes.`
 
-# Mise en place de l’application dans le Cloud Azure
+### Mise en place de l’application dans le Cloud Azure
 Le déploiement de votre application dans Azure comme App Service se fait en suivant les étapes suivantes :
 - Création d’un compte utilisateur de déploiement :  pour ce tutoriel il s’agit de **smb214** mot de passe **[Cnam1234\*]** mais vous pouvez indiquer vos propres informations ;
 - Création d’un groupe de ressources appelé par exemple  **smb214GroupeRessources** à l’emplacement **France Central** ; si aucun instance n’est pas disponible lors de la création du service, choisissez une autre localisation de Datacenter ;
 - Création du plan Azure Service **smb214PlanAppService** avec le niveau **tarifaire Gratuit (FREE)** dans le groupe de ressource **smb214GroupeRessources** ; 
 - Création de l’application Web Node.JS avec un nom doit être **unique** dans Azure, le moteur de script **Node.JS 12.4**,  le plan Azure Service **smb214PlanAppService** dans le groupe de ressource **smb214GroupeRessources** le déploiement **Git activé**. Dans ce document le nom choisi **smb214fido2ct** est mais **vous devez en utiliser un autre**. 
 
-# Création de l’application Web depuis le portail Azure
+### Création de l’application Web depuis le portail Azure
 -	Se connecter au portail Azure à l’URL : https://portal.azure.com
 -	Dans le portail Azure choisissez le Web App Services service et cliquez sur le bouton **Créer une App service**. Si vous ne trouvez pas ce service utiliser la zone de recherche.
 
-![Prérequis](./static/img/azure_02.png)
+![portailazure](./static/img/azure_02.png)
 
 Avez votre compte étudiant, vous disposez de l’abonnement Azure pour les étudiants.
 
@@ -203,7 +202,7 @@ Créez ensuite un plan Azure Service nommé **smb214PlanAppService** avec le niv
 
 Cliquez sur le bouton **[Vérifier  + Créer]**. Cela affiche un résumé de vos options et vous pouvez alors valider en cliquant sur le bouton **Créer**.
  
-![Prérequis](./static/img/azure_03.png)
+![creerwaeapp](./static/img/azure_03.png)
 
 Votre application est maintenant visible parmi la liste de vos App Service. Si nécessaire actualiser la page :
 
@@ -225,7 +224,7 @@ Puis ensuite dans l’onglet **Informations d’identification FTPS/Git** rensei
 
 Enregistrez vos modifications.
  
-![Prérequis](./static/img/azure_05.png)
+![comptedeploiement](./static/img/azure_05.png)
 
 L’URL du dépôt git sur Azure qui permettra la publication de votre code est affichée. 
 Pour cet exemple l’URL est : https://smb214fido2ct.scm.azurewebsites.net:443/smb214fido2ct.git
@@ -242,7 +241,7 @@ Testez avec votre navigateur que vous accédez bien à l’application (vide pou
 
 ![Prérequis](./static/img/azure_06.png) 
 
-# Envoyer le code de l’application (push) avec Git
+### Envoyer le code de l’application (push) avec Git
 
 Avant d’envoyer votre code vers la Web App dans Azure il est indispensable de modifier le fichier config.json d’application locale afin de renseigner correctement l’origine du site Web
 
@@ -282,7 +281,7 @@ En accédant à votre Web App, vous pouvez visualiser l’application et la test
 
 ![Prérequis](./static/img/azure_07.png) 
 
-# Envoyer des modifications du dépôt local sur l’application Web app dans Azure avec Git
+### Envoyer des modifications du dépôt local sur l’application Web app dans Azure avec Git
 
 Si vous avez des modifications à apporter à la Web App utiliser les commandes suivantes pour les valider localement avant de les pousser dans Azure
 - COMMANDE SHELL  
