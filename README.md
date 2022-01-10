@@ -40,7 +40,8 @@ Il faut installer les logiciels suivants :
 •	OpenSSL
 •	Un navigateur Internet (Chrome, Edge, Firefox ou Safari)
 
-`**Remarque**`
+`Remarque`
+
 `Pour ceux qui souhaite installer NodeJS sur Windows, un fichier MSI est mis à disposition sur le site officiel et permet d’installer à la fois NodeJS et NPM.`
 
 # Installation de l’application
