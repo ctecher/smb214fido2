@@ -6,7 +6,7 @@
 
 Slides: https://slides.com/fidoalliance/jan-2018-fido-seminar-webauthn-tutorial#/
 
-Dépôt : `https://github.com/fido-alliance/webauthn-demo/`
+Dépôt : https://github.com/fido-alliance/webauthn-demo/
 
 ## 1. Téléchargement de l’application de démonstration
 
