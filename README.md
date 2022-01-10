@@ -49,12 +49,12 @@ Si vous avez utilisé la méthode 1 pour récupérer les sources, vous devez dé
 ### Génération d'une clé privée et d'un certificat
 Dans le cadre de cette application, on va créer une clé privée ainsi qu’un certificat auto-signé. L’outil OpenSSL est nécessaire pour réaliser les étapes suivantes.
 
-####Etape 1) On crée la clé privée :####
+#### Etape 1) On crée la clé privée :####
 - COMMANDE SHELL 
 ```Bash
 dossier/smb214fido2$ openssl genrsa -out key.pem
 ```
-####Etape 2) On crée un fichier de requête de signature de certificat####
+#### Etape 2) On crée un fichier de requête de signature de certificat####
 - COMMANDE SHELL 
 ```Bash
 dossier/smb214fido2$ openssl req -new -key key.pem -out csr.pem
@@ -64,12 +64,12 @@ dossier/smb214fido2$ openssl req -new -key key.pem -out csr.pem
 
 Dans le cadre de cette exemple, vous pouvez par exemple choisir : **fido2.smb214.cnam.local**
 
-####Etape 3) On génère le certificat auto-signé à l’aide du fichier CSR####
+#### Etape 3) On génère le certificat auto-signé à l’aide du fichier CSR####
 - COMMANDE SHELL 
 ```Bash
 dossier/smb214fido2$ openssl x509 -req -days 9999 -in csr.pem -signkey key.pem -out cert.pem
 ```
-**Etape 4) On dépose les fichiers key.pem et cert.pem dans le répertoire contenant les sources de l’application.**
+#### Etape 4) On dépose les fichiers key.pem et cert.pem dans le répertoire contenant les sources de l’application.####
 ![fichiershttps](./static/img/vm_01.png)
 
 # Modification de l’application
