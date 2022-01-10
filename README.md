@@ -33,7 +33,7 @@ La création de l’application de démonstration FIDO2 dans une VM nécessite :
 
 Ressources pour la configuration d'un serveur nodejs en HTTPS : https://blog.goovy.io/running-a-nodejs-server-with-https/
 
-## Prérequis
+### Prérequis
 Il faut installer les logiciels suivants : 
 •	NodeJS
 •	NPM
@@ -41,21 +41,20 @@ Il faut installer les logiciels suivants :
 •	Un navigateur Internet (Chrome, Edge, Firefox ou Safari)
 
 `Remarque`
-
 `Pour ceux qui souhaite installer NodeJS sur Windows, un fichier MSI est mis à disposition sur le site officiel et permet d’installer à la fois NodeJS et NPM.`
 
-# Installation de l’application
+### Installation de l’application
 Si vous avez utilisé la méthode 1 pour récupérer les sources, vous devez décompresser le fichier puis déposer le répertoire **smb214fido-master** à l’emplacement de votre choix.
 
-# Génération d'une clé privée et d'un certificat
+### Génération d'une clé privée et d'un certificat
 Dans le cadre de cette application, on va créer une clé privée ainsi qu’un certificat auto-signé. L’outil OpenSSL est nécessaire pour réaliser les étapes suivantes.
 
-**Etape 1) On crée la clé privée :**
+####Etape 1) On crée la clé privée :####
 - COMMANDE SHELL 
 ```Bash
 dossier/smb214fido2$ openssl genrsa -out key.pem
 ```
-**Etape 2) On crée un fichier de requête de signature de certificat**
+####Etape 2) On crée un fichier de requête de signature de certificat####
 - COMMANDE SHELL 
 ```Bash
 dossier/smb214fido2$ openssl req -new -key key.pem -out csr.pem
@@ -65,7 +64,7 @@ dossier/smb214fido2$ openssl req -new -key key.pem -out csr.pem
 
 Dans le cadre de cette exemple, vous pouvez par exemple choisir : **fido2.smb214.cnam.local**
 
-**Etape 3) On génère le certificat auto-signé à l’aide du fichier CSR**
+####Etape 3) On génère le certificat auto-signé à l’aide du fichier CSR####
 - COMMANDE SHELL 
 ```Bash
 dossier/smb214fido2$ openssl x509 -req -days 9999 -in csr.pem -signkey key.pem -out cert.pem
