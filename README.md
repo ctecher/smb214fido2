@@ -18,78 +18,79 @@ Slides: https://slides.com/fidoalliance/jan-2018-fido-seminar-webauthn-tutorial#
 - `npm install`
 - `node app`
 
-### Exposé SMB214
+### SMB214 – FIDO2
+### Déploiement de l’application de démonstration
 
-## Installation en local
-# Prérequis
-- Logiciels installés : Nodejs, NPM navigateur (Chrome, Edge ou Firefox).
-	
-# Téléchargement de l’application – méthode 1
+## 1. Téléchargement de l’application de démonstration
+
+# Méthode 1 - Depuis le site Github
 - Téléchargez le dépôt du projet à l’URL suivante et décompressez l’archive dans le dossier de votre choix : 
 https://github.com/ctecher/smb214fido2.git
 
-# Téléchargement de l’application – méthode 2
+# Méthode 2 - Utilisation de l’application Git
 - Installez Git dans votre environnement de travail : 
 - Lien : https://git-scm.com/ 
 
-Dans le dossier de votre choix, cloner le dépôt https://github.com/ctecher/smb214fido2.git :
+Dans le dossier de votre choix, cloner le dépôt https://github.com/ctecher/smb214fido2.git
 - COMMANDE SHELL 
 ```Bash
 dossier$ git clone https://github.com/ctecher/smb214fido2.git
 ```
 
-
-# Mise en place de l’application
-Installez les modules et lancez l’application :
-
-- COMMANDE SHELL 
-```Bash
-dossier$ cd smb214fido2
-dossier/smb214fido2$ npm install
-dossier/smb214fido2$ node app
-```
-# Accès l’application
-Depuis votre navigateur, accédez à l’URL 
-http://localhost:3000
-
-## Création de l’application dans une VM 
+## 2. Installation de l’application (ordinateur physique ou VM)
 La création de l’application de démonstration FIDO2 dans une VM nécessite :
--	d’installer les sources de l’application comme montré précédemment ;
--	de configurer le site web en HTTPS ,
--	d’utiliser un nom DNS,
--	de créer un enregistrement dans le fichier hosts de votre ordinateur.
+- D’installer les sources de l’application comme montré précédemment.
+- De configurer le site web en HTTPS.
+- De modifier certains fichiers de l’application.
+- De créer un enregistrement dans le fichier hosts de votre ordinateur.
 
 Ressources pour la configuration d'un serveur nodejs en HTTPS : https://blog.goovy.io/running-a-nodejs-server-with-https/
 
-- Installez les sources comme montré précédemment (téléchargement de l’archive depuis Github ou bien utilisation de Git pour cloner le dépôt) 
-# Générer une clé privée
+# Prérequis
+Il faut installer les logiciels suivants : 
+•	NodeJS
+•	NPM
+•	OpenSSL
+•	Un navigateur Internet (Chrome, Edge, Firefox ou Safari)
 
+- Remarque
+Pour ceux qui souhaite installer NodeJS sur Windows, un fichier MSI est mis à disposition sur le site officiel et permet d’installer à la fois NodeJS et NPM.
+
+# Installation de l’application
+Si vous avez utilisé la méthode 1 pour récupérer les sources, vous devez décompresser le fichier puis déposer le répertoire **smb214fido-master** à l’emplacement de votre choix.
+
+# Génération d'une clé privée et d'un certificat
+Dans le cadre de cette application, on va créer une clé privée ainsi qu’un certificat auto-signé. L’outil OpenSSL est nécessaire pour réaliser les étapes suivantes.
+
+**Etape 1) On crée la clé privée :**
 - COMMANDE SHELL 
 ```Bash
 dossier/smb214fido2$ openssl genrsa -out key.pem
 ```
-
-# Générer un certificat autosigné
-- Créez la requête de demande se signature du certificat 
+**Etape 2) On crée un fichier de requête de signature de certificat**
 - COMMANDE SHELL 
 ```Bash
 dossier/smb214fido2$ openssl req -new -key key.pem -out csr.pem
 ```
 
-- Renseignez les champs demandés et choisissez bien le Commun Name puisqu'il devra être utilisé comme URL.
+- Renseignez les informations demandées, leur valeur n’a aucune importance SAUF pour le champ Commun Name qui va servir pour l’url HTTPS de notre application.
 
-Dans notre exemple, on a mis fido2.smb214.cnam.local
+Dans le cadre de cette exemple, vous pouvez par exemple choisir : **fido2.smb214.cnam.local**
 
-# Générez le certificat auto-signé 
+**Etape 3) On génère le certificat auto-signé à l’aide du fichier CSR**
 - COMMANDE SHELL 
 ```Bash
 dossier/smb214fido2$ openssl x509 -req -days 9999 -in csr.pem -signkey key.pem -out cert.pem
 ```
+**Etape 4) On dépose les fichiers key.pem et cert.pem dans le répertoire contenant les sources de l’application.**
+![fichiershttps](./static/img/vm_01.png)
 
-- Vérifiez et si nécessaire déplacez les fichiers key.pem et cert.pem dans le répertoire où ou avez décompressé les sources de l'application.
- # Modification de l’application
-- Ouvrez le fichier app.js
-- Ajoutez ces lignes de code juste après la ligne 18 
+# Modification de l’application
+Par défaut, l’application n’a pas été configurée pour fonctionner avec le protocole HTTPS. De plus, il est nécessaire que l’on configure notre application pour qu’elle réponde avec l’url https://fido2.smb214.cnam.local
+
+**Etape 1) On modifie le fichier app.js de la façon suivante afin que l’application puisse démarrer en HTTPS :**
+
+- Ajoutez ces lignes de code juste après la ligne 18 du fichier app.js
 
 - FICHIER APP.JS 
 ```Javascript
@@ -101,7 +102,7 @@ const options = {
   cert: fs.readFileSync('cert.pem')
 };
 ```
-- Décommentez la ligne 46 et mettez en commentaires les lignes 47 à 50.
+- Retirez les commentaires à la ligne 46 et mettez en commentaires les lignes 47 à 50.
 - FICHIER APP.JS 
 ```Javascript
 const port = config.port || 3000;
@@ -118,8 +119,7 @@ const port = config.port || 3000;
 https.createServer(options, app).listen(port);
 console.log(`Lancement de l'application sur le port ${port}`);
 ```
-
-- Modifiez le fichier config.json pour modifier le port d’écoute indiquer l'origin avec l'url précédemment choi-si en incluant le HTTPS et le numéro de port => https://fido2.smb214.cnam.local:3000
+**Etape 2) On modifie le fichier config.json afin de modifier le port d’écoute indiquer l'origin avec l'url précédemment choisi en incluant le HTTPS et le numéro de port**
 
 - FICHIER CONFIG.JSON 
 ```Javascript
@@ -129,23 +129,40 @@ console.log(`Lancement de l'application sur le port ${port}`);
 }
 ```
 
-# Mise en place de l’application dans la VM
-- Installez les modules et lancez l’application :
+
+**Remarque**
+Rien ne vous empêche d’écouter sur un autre n° de port. Toutefois n’oubliez pas de vérifier que ce numéro soit identique dans le fichier config.jon et app.js.
+
+# Démarrage de l’application
+Positionnez-vous dans le répertoire contenant les sources de l’application et exécutez les commandes suivantes. Pour information, la commande node app permet de démarrer l’application. 
+
 - COMMANDE SHELL 
 ```Bash
 dossier/smb214fido2$ npm install
 dossier/smb214fido2$ node app
 ```
-# Configuration de votre ordinateur local pour accéder à l’application hébergée dans la VM
-- Modifiez votre fichier hosts pour ajouter l'entrée suivante (renseigner l'adresse IP de votre serveur NodeJS) : 
+# Configuration du fichier hosts
+Afin d’être en mesure de joindre l’application avec l’url en HTTPS, il est nécessaire de configurer soit votre serveur DNS, soit votre fichier hosts.
+
+**Etape 1) On récupère l’adresse IP de votre machine (ipconfig ou ip -4).**
+
+**Etape 2) On ajout une ligne dans le fichier hosts sur la machine depuis laquelle vous souhaitez joindre l’application.**
+ 
 - FICHIER HOSTS 
 ```Bash
 192.168.0.4	fido2.smb214.cnam.local
 ```
+
+**Remarque**
+Sur Windows, le fichier hosts est stocké dans le répertoire C:\Windows\System32\drivers\etc. Gardez en tête que vous devez ouvrir votre éditeur de texte en tant qu’administrateur pour pouvoir enregistrer les modifications.
+
+
 # Accès l’application
 Depuis votre navigateur, saisissez l'url https://fido2.smb214.cnam.local:3000 (ignorez le risque de sécurité, c'est normal car vous avez généré un certificat autosigné).
 
-# Création de l’application dans le cloud Azure en mode PaaS (App service)
+![appweb](./static/img/appweb_01.png)
+
+## Création de l’application dans le cloud Azure en mode PaaS (App service)
 
 
 # Les prérequis

@@ -17,6 +17,8 @@ $('#register').submit(function(event) {
     getMakeCredentialsChallenge({username, name})
         .then((response) => {
             let publicKey = preformatMakeCredReq(response);
+            console.log("publickey du navigateot.create");
+            console.log(publicKey);
             return navigator.credentials.create({ publicKey })
         })
         /*
@@ -28,6 +30,8 @@ $('#register').submit(function(event) {
         })
         */
        .then((response) => {
+           console.log("après navigator create");
+           console.log(response);
            let makeCredResponse = publicKeyCredentialToJSON(response);
            return sendWebAuthnResponse(makeCredResponse)
         })
@@ -86,30 +90,6 @@ let sendWebAuthnResponse = (body) => {
         return response
     })
 }
-
-
-let generateServerMakeCredRequest = (username, displayName, id) => {
-    return {
-        challenge: randomBase64URLBuffer(32),
-
-        rp: {
-            name: "FIDO SMB214 site demo"
-        },
-
-        user: {
-            id: id,
-            name: username,
-            displayName: displayName
-        },
-
-        pubKeyCredParams: [
-            {
-                type: "public-key", alg: -7 // "ES256" IANA COSE Algorithms registry
-            }
-        ]
-    }
-}
-
 
 //diapo 38
 let getGetAssertionChallenge = (formBody) => {

@@ -61,9 +61,18 @@ let generateServerMakeCredRequest = (username, displayName, id) => {
 
         pubKeyCredParams: [
             {
-                type: "public-key", alg: -7 // "ES256" IANA COSE Algorithms registry
-            }
-        ]
+                type: "public-key", alg: -7 // "ES256" IANA COSE Algorithms registry (ECDSA P-256 + SHA-256)
+            },
+            //ct
+            //{
+            //    type: "public-key", alg: -257 // "RS256" (RSASSA + SHA-256)
+            //}
+
+        ],
+        //ct
+        authenticatorSelection: {
+            authenticatorAttachement: "platform"
+        }
     }
 }
 
