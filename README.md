@@ -18,7 +18,7 @@ https://github.com/ctecher/smb214fido2.git
 - Installez Git dans votre environnement de travail : 
 - Lien : https://git-scm.com/ 
 
-Dans le dossier de votre choix, cloner le dépôt https://github.com/ctecher/smb214fido2.git
+Dans le dossier de votre choix, cloner le dépôt https://github.com/ctecher/smb214fido2.git :
 - COMMANDE SHELL 
 ```Bash
 dossier$ git clone https://github.com/ctecher/smb214fido2.git
@@ -33,15 +33,15 @@ La création de l’application de démonstration FIDO2 dans une VM nécessite :
 
 Ressources pour la configuration d'un serveur nodejs en HTTPS : https://blog.goovy.io/running-a-nodejs-server-with-https/
 
-# Prérequis
+## Prérequis
 Il faut installer les logiciels suivants : 
 •	NodeJS
 •	NPM
 •	OpenSSL
 •	Un navigateur Internet (Chrome, Edge, Firefox ou Safari)
 
-- Remarque
-Pour ceux qui souhaite installer NodeJS sur Windows, un fichier MSI est mis à disposition sur le site officiel et permet d’installer à la fois NodeJS et NPM.
+`**Remarque**`
+`Pour ceux qui souhaite installer NodeJS sur Windows, un fichier MSI est mis à disposition sur le site officiel et permet d’installer à la fois NodeJS et NPM.`
 
 # Installation de l’application
 Si vous avez utilisé la méthode 1 pour récupérer les sources, vous devez décompresser le fichier puis déposer le répertoire **smb214fido-master** à l’emplacement de votre choix.
